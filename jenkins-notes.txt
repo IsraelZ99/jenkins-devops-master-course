@@ -1,0 +1,10 @@
+************ TO ALLOW PERMISSION TO JENKINS CONTAINER OF CONNECT TO DOCKER MACHINE ************
+- Verify the id of jenkins user in container (sometimes is 1000)
+# sudo chown 1000:1000 /var/run/docker.sock
+
+************ TO START DOCKER DAEMON ON CENTOS AFTER STARTUP ****************
+# chmod +x /etc/rc.d/rc.local
+# nano /etc/rc.d/rc.local
+- Inside of file add script
+# systemctl start docker
+

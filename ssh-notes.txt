@@ -1,0 +1,15 @@
+************* CREATE SSH TO JENKINS AN ANOTHER SERVER/CONTAINER ********
+1.
+# ssh-keygen -t rsa -m PEM -f <name>
+
+- Copy file .pub to the server or container
+- In the server copy the .pub file to ~/.ssh/authorized-keys
+- Run the command ssh-keygen -A (on the server or container)
+
+
+2.
+- Copy the file ssh (not pub) to jenkins container (docker cp in /tmp)
+- Show data of ssh file into jekins container (cat <file>)
+- Copy the data of the file in a new credential in jenkins
+
+

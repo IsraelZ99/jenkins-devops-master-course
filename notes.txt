@@ -1,0 +1,35 @@
+************** CREDENTIALS TO CONNECT TO JENKINS **************
+user: admin
+password: jenkins12345
+
+------------- STOP DOCKER COMPOSE (CONTAINER) --------------
+docker-compose stop
+
+------------- START DOCKER COMPOSE (CONTAINER) --------------
+docker-compose start
+
+------------- RESTART DOCKER COMPOSE (CONTAINER) --------------
+docker-compose restart
+
+------------- RESTART SPECIFIC CONTAINER IN COMPOSE --------------
+docker-compose restart container-name
+
+------------- DELETE DOCKER CONTAINERS --------------
+docker-compose down
+
+------------- UP DOCKER COMPOSE (CONTAINERS) --------------
+docker-compose up -d
+
+------------- BUILD DOCKER CONTAINER WITH DOCKERFILE --------------
+docker-compose build
+
+
+*********************** CONNECT FROM JENKINS CONTAINER TO REMOTE_HOST CONTAINER ****************
+cd /tmp
+
+----------------  CONNECT IF EXIT THE SSH KEY GENERATED ----------------
+ssh -i remote-key remote_user@remote_host
+
+----------------  CONNECT IF NOT EXIT THE SSH KEY GENERATED ----------------
+ssh remote_user@remote_host
+password: 1234

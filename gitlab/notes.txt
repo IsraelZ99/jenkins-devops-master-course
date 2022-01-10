@@ -1,0 +1,10 @@
+Al iniciar gitlab regularmente no abre la pagina para cambiar la password de el usuario inicial (root); Para modificar la password, se tiene que acceder al contenedor de gitlab y ejecutar el comando:
+# gitlab-rake "gitlab:password:reset"
+# root
+# any-password
+
+Usuario: root
+Password: admin12345
+
+Usuario jenkins.server
+Password 12345678

@@ -1,0 +1,31 @@
+job('maven_dsl') {
+
+    description('Maven dsl project')
+
+    scm {
+        git('https://github.com/IsraelZ99/Initialize-Spring-Boot-Security-Jwt.git', 'master', {node -> node / 'extensions' << '' })
+    }
+  
+    steps {
+        maven {
+            mavenInstallation('jenkins-maven')
+            goals('clean package -DskipTests')
+        }
+        maven {
+            mavenInstallation('jenkins-maven')
+            goals('test')
+        }
+        shell('''
+            echo "******************"
+	    echo "  DOWNLOAD JAR"
+	    echo "******************"
+	    echo "http://pc.decsef:8000/job/maven-job/ws/target/pix-server-0.0.1.jar"
+        ''')
+    }
+
+    publishers {
+        archiveArtifacts('target/*.jar')
+        archiveJunit('target/surefire-reports/*.xml')
+        mailer('israelz.garciah@gmail.com', true, true)
+    }
+}

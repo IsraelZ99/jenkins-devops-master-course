@@ -1,0 +1,70 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/docker
+    build:
+      context: pipeline
+    ports:
+      - "8000:8080"
+    restart: always
+    volumes:
+      - "$PWD/jenkins_home:/var/jenkins_home"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - net
+  remote_host:
+    container_name: remote-host
+    image: remote-host
+    build: 
+      context: centos7
+    volumes:
+      - "$PWD/aws-s3.sh:/tmp/script-aws.sh"
+    restart: always
+    networks:
+      - net
+  db_host:
+    container_name: db_mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=1234"
+    volumes:
+      - "$PWD/db_data:/var/lib/mysql"
+    networks:
+      - net
+  web_server:
+    container_name: web
+    image: ansible-web
+    restart: always
+    build:
+      context: jenkins-ansible/web
+    ports:
+      - "80:80"
+    networks:
+      - net
+  gitlab:
+    container_name: git-server
+    image: 'gitlab/gitlab-ce:latest'
+    hostname: 'gitlab.example.com'
+    restart: always
+    ports:
+      - '8090:80'
+    volumes:
+      - '$PWD/gitlab_home/config:/etc/gitlab'
+      - '$PWD/gitlab_home/logs:/var/log/gitlab'
+      - '$PWD/gitlab_home/data:/var/opt/gitlab'
+    networks:
+      - net
+  nexus-server:
+    container_name: nexus
+    image: sonatype/nexus3
+    restart: always
+    volumes:
+      - '$PWD/nexus-home-data:/nexus-data'
+    ports:
+      - "8083:8081"
+    networks:
+      - net
+networks:
+        net:

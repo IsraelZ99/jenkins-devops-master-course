@@ -1,0 +1,4 @@
+**************** FIX ERROR AFTER BOOT VIRUTAL MACHINE *************
+* Login with ssh into prod-user
+* Run command:
+	# systemctl start docker
